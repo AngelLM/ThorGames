@@ -8,6 +8,7 @@
 // digital pin 2 has a pushbutton attached to it. Give it a name:
 int casillas[] = {2,3,4,5,6,7,8,9,10};
 bool casillasState[] = {0,0,0,0,0,0,0,0,0};
+char command = ' ';
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -23,27 +24,32 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
   // read the input pin:
-  int k=0;
-  for (k=0;k<9;k++){
-    casillasState[k] = digitalRead(casillas[k]);
+  if (Serial.available() > 0) {
+      command = Serial.read();
+      if (command == 'p'){
+        int k=0;
+        for (k=0;k<9;k++){
+          casillasState[k] = digitalRead(casillas[k]);
+        }
+        int l=0;
+        for (l=0;l<9;l++){
+          Serial.print(casillasState[l]);
+        }
+        Serial.println("");
+        /*int l=0;                           // Graphically
+        for (l=0;l<9;l++){
+          Serial.print(casillasState[l]);
+          if ((l+1)%3==0){
+            Serial.println("");
+          }
+          else{
+            Serial.print(" ,");
+          }
+        }*/
+              
+      }
   }
-  // print out the state of the button:
-  Serial.println("");
-  Serial.println("");
-  Serial.println("");
-  
-  int l=0;
-  for (l=0;l<9;l++){
-    Serial.print(casillasState[l]);
-    if ((l+1)%3==0){
-      Serial.println("");
-    }
-    else{
-      Serial.print(" ,");
-    }
-  }
-  delay(1000);        // delay in between reads for stability
-}
+ }
 
 
 
