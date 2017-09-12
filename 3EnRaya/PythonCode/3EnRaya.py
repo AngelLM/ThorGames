@@ -1,4 +1,15 @@
 import random
+import math
+import time
+
+import sys
+import serial
+import glob
+
+puerto0='/dev/ttyACM0'
+
+
+gameArray = [0,0,0,0,0,0,0,0,0]
 
 casillas = [0,0,0,              # 0 1 2
             0,0,0,              # 3 4 5
@@ -15,6 +26,8 @@ columnas = [[0,0,0],
 diagonales= [[0,0,0],
         [0,0,0]]
 
+turnoThor = False
+turnoRival = True
 juegoTerminado = False
 
 moverPiezaCodes=["Thor mueve pieza a casilla 0",
@@ -33,6 +46,8 @@ def actualizarDatos():
     global filas
     global columnas
     global diagonales
+    global gameArray
+
     filas = [[casillas[0],casillas[1],casillas[2]],
             [casillas[3],casillas[4],casillas[5]],
             [casillas[6],casillas[7],casillas[8]]]
@@ -43,6 +58,10 @@ def actualizarDatos():
 
     diagonales = [[casillas[0],casillas[4],casillas[8]],
             [casillas[2],casillas[4],casillas[6]]]
+
+    for i in range(len(casillas)):
+        if casillas[i]!=0:
+            gameArray[i]=1
 
 def comprobarPropio():
     # Filas
@@ -270,11 +289,33 @@ def bloquearDiagonal(d):
 
 def pedirDatos():
     global casillas
-    print "Casilla?"
-    casilla = input()
+    casilla = comprobarArray(list(s0.readline()))
     numerocasilla = int(casilla)
-    casillas[numerocasilla]=1
+    if numerocasilla!=-1 and numerocasilla!=10:
+        casillas[numerocasilla]=1
     actualizarDatos()
+
+def comprobarArray(inputArray):
+    print inputArray
+    global gameArray
+    print gameArray
+    contador = 0
+    index = 5
+    for i in range(len(gameArray)):
+        if int(inputArray[i])!=gameArray[i]:
+            contador += 1
+            print contador
+            index = i
+    if contador == 1:
+        return index
+    elif contador >1:
+        print "Error: >1 diferencia"
+        return 10
+    else:
+        print "Error: <1 diferencia"
+        return -1
+
+
 
 def mover():
     if jugadaDetect():
@@ -363,6 +404,11 @@ def moverPieza(pos):
     print moverPiezaCodes[pos]
 
 
+s0=serial.Serial(puerto0,9600)
+time.sleep(2)
+s0.close()
+s0.open()
+
 printInicial()
 while juegoTerminado==False:
     pedirDatos()
@@ -389,5 +435,7 @@ while juegoTerminado==False:
                     bloquearDiagonal(checkRival[1])
             else:
                 mover()
+    actualizarDatos()
     printTablero()
     checkFinal()
+s0.close()

@@ -1,8 +1,22 @@
-vectorraw=[0,1,2,3]
-vectorpeq=[[vectorraw[0],vectorraw[1]],[vectorraw[2],vectorraw[3]]]
+import math
+import time
 
-for i in vectorraw:
-    if i==2:
-        i=3
+import sys
+import serial
+import glob
 
-print vectorraw
+
+puerto0='/dev/ttyACM0'
+
+time.sleep(2)
+
+s0=serial.Serial(puerto0,9600)
+s0.close()
+s0.open()
+while True:
+    print list(s0.readline())
+
+s0.close()
+
+# s0.write(('M17 \n').encode('UTF-8'))
+# s1.write(('M17 \n').encode('UTF-8'))
