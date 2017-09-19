@@ -26,21 +26,59 @@ columnas = [[0,0,0],
 diagonales= [[0,0,0],
         [0,0,0]]
 
+turnoNumero = 0
+
 turnoThor = False
 turnoRival = True
 juegoTerminado = False
 
-moverPiezaCodes=["Thor mueve pieza a casilla 0",
-                "Thor mueve pieza a casilla 1",
-                "Thor mueve pieza a casilla 2",
-                "Thor mueve pieza a casilla 3",
-                "Thor mueve pieza a casilla 4",
-                "Thor mueve pieza a casilla 5",
-                "Thor mueve pieza a casilla 6",
-                "Thor mueve pieza a casilla 7",
-                "Thor mueve pieza a casilla 8"]
+moverPiezaCodesUno=["G0A10B-35C-35D-85X0Y-2.3Z-2.3 \n",
+                    "G0A-2B-30C-30D-90X0Y-2.6Z-2.6 \n",
+                    "G0A-13.5B-33C-33D-88X0Y-2.35Z-2.35 \n",
+                    "G0A7B-45C-45D-70X0Y-2Z-2 \n",
+                    "G0A-3B-45C-45D-70X0Y-2Z-2 \n",
+                    "G0A-12B-45C-45D-70X0Y-2Z-2 \n",
+                    "G0A6B-70C-70D-30X0Y-0.5Z-0.5 \n",
+                    "G0A-2B-65C-65D-34.5X0Y-0.7Z-0.7 \n",
+                    "G0A-10B-70C-70D-28X0Y-0.35Z-0.35 \n"]
 
+moverPiezaCodesDos=["G0A10B-38C-38D-92X0Y-2.3Z-2.3 \n",
+                    "G0A-2B-34C-34D-98X0Y-2.6Z-2.6 \n",
+                    "G0A-13.5B-37C-37D-92X0Y-2.35Z-2.35 \n",
+                    "G0A7B-49C-49D-75X0Y-2Z-2 \n",
+                    "G0A-3B-49C-49D-75X0Y-2Z-2 \n",
+                    "G0A-12B-49C-49D-75X0Y-2Z-2 \n",
+                    "G0A6B-74C-74D-35X0Y-0.5Z-0.5 \n",
+                    "G0A-2B-72C-72D-38.5X0Y-0.7Z-0.7 \n",
+                    "G0A-10B-75C-75D-32X0Y-0.35Z-0.35 \n"]
 
+moverPiezaCodesTres=["G0A-2B-40C-40D90X3Y-9Z-9 \n",
+                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
+                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
+                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
+                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
+                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
+                    "G01A-2B-40C-40D90X3Y-9Z-9F2000 \n",
+                    "G01A-2B-40C-40D90X3Y-9Z-9F2000 \n",
+                    "G01A-2B-40C-40D90X3Y-9Z-9F2000 \n"]
+
+pillarPiezaCodesUno=["Pillo Pieza 0 UNO \n",
+                    "Pillo Pieza 1 UNO \n",
+                    "Pillo Pieza 2 UNO \n",
+                    "Pillo Pieza 3 UNO \n",
+                    "Pillo Pieza 4 UNO \n"]
+
+pillarPiezaCodesDos=["Pillo Pieza 0 DOS \n",
+                    "Pillo Pieza 1 DOS \n",
+                    "Pillo Pieza 2 DOS \n",
+                    "Pillo Pieza 3 DOS \n",
+                    "Pillo Pieza 4 DOS \n"]
+
+pillarPiezaCodesTres=["Pillo Pieza 0 TRES \n",
+                    "Pillo Pieza 1 TRES \n",
+                    "Pillo Pieza 2 TRES \n",
+                    "Pillo Pieza 3 TRES \n",
+                    "Pillo Pieza 4 TRES \n"]
 
 def actualizarDatos():
     global filas
@@ -296,15 +334,15 @@ def pedirDatos():
     actualizarDatos()
 
 def comprobarArray(inputArray):
-    print inputArray
+    # print inputArray
     global gameArray
-    print gameArray
+    # print gameArray
     contador = 0
     index = 5
     for i in range(len(gameArray)):
         if int(inputArray[i])!=gameArray[i]:
             contador += 1
-            print contador
+            # print contador
             index = i
     if contador == 1:
         return index
@@ -401,7 +439,33 @@ def checkFinal():
             print "Empate"
 
 def moverPieza(pos):
-    print moverPiezaCodes[pos]
+    pillarPieza()
+    print moverPiezaCodesUno[pos]
+    # s0.write((moverPiezaCodesUno[pos]).encode('UTF-8'))
+    print moverPiezaCodesDos[pos]
+    # s0.write((moverPiezaCodesDos[pos]).encode('UTF-8'))
+    print "M3S100 \n"
+    # s0.write(('M3S100 \n').encode('UTF-8'))
+    print "G4P0.5\n"
+    # s0.write(('G4P0.5 \n').encode('UTF-8'))
+    print moverPiezaCodesTres[pos]
+    # s0.write(moverPiezaCodesTres[pos]).encode('UTF-8'))
+
+def subirTurno():
+    global turnoNumero
+    turnoNumero += 1
+
+def pillarPieza():
+    print pillarPiezaCodesUno[turnoNumero]
+    # s0.write((pillarPiezaCodesUno[turnoNumero]).encode('UTF-8'))
+    print pillarPiezaCodesDos[turnoNumero]
+    # s0.write((pillarPiezaCodesDos[turnoNumero]).encode('UTF-8'))
+    print "M3S900 \n"
+    # s0.write(('M3S900 \n').encode('UTF-8'))
+    print "G4P0.5 \n"
+    # s0.write(('G4P0.5 \n').encode('UTF-8'))
+    print pillarPiezaCodesTres[turnoNumero]
+    # s0.write(pillarPiezaCodesTres[turnoNumero]).encode('UTF-8'))
 
 
 s0=serial.Serial(puerto0,9600)
@@ -438,4 +502,5 @@ while juegoTerminado==False:
     actualizarDatos()
     printTablero()
     checkFinal()
+    subirTurno()
 s0.close()

@@ -29,7 +29,7 @@ void loop() {
       message="";
   }
   previousButtonState = currentButtonState;
-  delay(1);
+  delay(100);
 }
 //          Serial.print(casillasState[l]);
 //        }
