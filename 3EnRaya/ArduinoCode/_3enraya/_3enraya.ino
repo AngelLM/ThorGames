@@ -1,41 +1,41 @@
-/*
-  DigitalReadSerial
- Reads a digital input on pin 2, prints the result to the serial monitor 
- 
- This example code is in the public domain.
- */
+int Button = 11;
+int previousButtonState = 0;
+int currentButtonState = 0;
 
-// digital pin 2 has a pushbutton attached to it. Give it a name:
 int casillas[] = {2,3,4,5,6,7,8,9,10};
-bool casillasState[] = {0,0,0,0,0,0,0,0,0};
-char command = ' ';
+int casillasState[] = {0,0,0,0,0,0,0,0,0};
 
-// the setup routine runs once when you press reset:
+String message = String();
+
 void setup() {
-  // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
-  // make the pushbutton's pin an input:
   int i=0;
   for (i=0;i<9;i++){
     pinMode(casillas[i], INPUT);
   }
+  pinMode(Button, INPUT);
+
 }
 
-// the loop routine runs over and over again forever:
 void loop() {
-  // read the input pin:
-  if (Serial.available() > 0) {
-      command = Serial.read();
-      if (command == 'p'){
-        int k=0;
-        for (k=0;k<9;k++){
-          casillasState[k] = digitalRead(casillas[k]);
-        }
-        int l=0;
-        for (l=0;l<9;l++){
-          Serial.print(casillasState[l]);
-        }
-        Serial.println("");
+  currentButtonState = digitalRead(Button);
+  if (currentButtonState==1 && previousButtonState==0){
+      int k=0;
+      for (k=0;k<9;k++){
+        casillasState[k] = digitalRead(casillas[k]);
+      }
+      message = message + casillasState[0] + casillasState[1] + casillasState[2] + casillasState[3] + casillasState[4] + casillasState[5] + casillasState[6] + casillasState[7] + casillasState[8];
+      Serial.println(message);
+      message="";
+  }
+  previousButtonState = currentButtonState;
+  delay(1);
+}
+//          Serial.print(casillasState[l]);
+//        }
+//        Serial.println("");
+
+
         /*int l=0;                           // Graphically
         for (l=0;l<9;l++){
           Serial.print(casillasState[l]);
@@ -46,10 +46,6 @@ void loop() {
             Serial.print(" ,");
           }
         }*/
-              
-      }
-  }
- }
-
+          
 
 
