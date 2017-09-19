@@ -26,8 +26,8 @@ columnas = [[0,0,0],
 diagonales= [[0,0,0],
         [0,0,0]]
 
+empiezaThor = False
 turnoNumero = 0
-
 turnoThor = False
 turnoRival = True
 juegoTerminado = False
@@ -103,6 +103,7 @@ def actualizarDatos():
 
 def comprobarPropio():
     # Filas
+
     for y in range(3):
         contadorPropio=0
         contadorRival=0
@@ -329,13 +330,14 @@ def pedirDatos():
     global casillas
     casilla = comprobarArray(list(s0.readline()))
     numerocasilla = int(casilla)
-    if numerocasilla!=-1 and numerocasilla!=10:
+    if numerocasilla!=-1 and numerocasilla!=10 and numerocasilla!=99:
         casillas[numerocasilla]=1
     actualizarDatos()
 
 def comprobarArray(inputArray):
     # print inputArray
     global gameArray
+    global empiezaThor
     # print gameArray
     contador = 0
     index = 5
@@ -349,6 +351,9 @@ def comprobarArray(inputArray):
     elif contador >1:
         print "Error: >1 diferencia"
         return 10
+    elif contador == 0 and turnoNumero == 0:
+        empiezaThor = True
+        return 99
     else:
         print "Error: <1 diferencia"
         return -1
@@ -379,6 +384,47 @@ def moverEsquinas():
             moverPieza(i)
             return True
     return False
+
+# def moverEsquinas():
+#     global casillas
+#     esquinasVacias=[]
+#     for i in [0,2,6,8]:
+#         if casillas[i]==0:
+#             esquinasVacias.append(i)
+#
+#     if len(esquinasVacias)==0:
+#         return False
+#
+#     elif len(esquinasVacias)==1:
+#         casillas[esquinasVacias[0]]=2
+#         moverPieza(esquinasVacias[0])
+#         return True
+#
+#     else:
+#         for k in esquinasVacias:
+#             if k == 0:
+#                 if casillas[1]==0 and casillas[2]==0 and casillas[3]==0 and casillas[6]==0:
+#                     casillas[k]=2
+#                     moverPieza(k)
+#                     return True
+#             if k == 2:
+#                 if casillas[0]==0 and casillas[1]==0 and casillas[5]==0 and casillas[8]==0:
+#                     casillas[k]=2
+#                     moverPieza(k)
+#                     return True
+#             if k == 2:
+#                 if casillas[0]==0 and casillas[1]==0 and casillas[5]==0 and casillas[8]==0:
+#                     casillas[k]=2
+#                     moverPieza(k)
+#                     return True
+#
+#
+#
+#
+#             casillas[i]=2
+#             moverPieza(i)
+#             return True
+#     return False
 
 def jugadaDetect():
     global casillas
