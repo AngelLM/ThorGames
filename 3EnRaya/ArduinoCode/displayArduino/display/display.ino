@@ -80,7 +80,7 @@ void ThorWins(){
   bool ThorWinsFraseUno=false;
   bool ThorWinsFraseDos=false;
   bool ThorWinsFraseBlank=false;
-  int temporizador = millis();
+  unsigned long temporizador = millis();
   while (ThorWinsTime){
     char fraseWinUno[8]={'t','h','o','r','g','a','n','a'};
     char fraseBlank[8]={' ',' ',' ',' ',' ',' ',' ',' '};
@@ -109,7 +109,7 @@ void ThorWinsFull(){
   bool ThorWinsTime=true;
   bool ThorWinsFrase=false;
   bool ThorWinsFraseBlank=false;
-  int temporizador = millis();
+  unsigned long temporizador = millis();
   int showTime=500;
   char fraseThorWins[8] = {'t','h','o','r','g','a','n','a'};
   char fraseBlank[8]={' ',' ',' ',' ',' ',' ',' ',' '};
@@ -142,7 +142,7 @@ void TramposoFull(){
   bool TramposoFrase=false;
   bool TramposoFraseBlank=false;
   bool TramposoFraseDos=false;
-  int temporizador = millis();
+  unsigned long temporizador = millis();
   int showTime=500;
   char fraseTramposo[8] = {'t','r','a','m','p','o','s','o'};
   char fraseBlank[8]={' ',' ',' ',' ',' ',' ',' ',' '};
