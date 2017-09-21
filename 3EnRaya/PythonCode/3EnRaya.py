@@ -34,25 +34,25 @@ turnoThor = False
 turnoRival = True
 juegoTerminado = False
 
-moverPiezaCodesUno=["G0A10B-35C-35D-85X0Y-2.3Z-2.3 \n",
-                    "G0A-2B-30C-30D-90X0Y-2.6Z-2.6 \n",
-                    "G0A-13.5B-33C-33D-88X0Y-2.35Z-2.35 \n",
-                    "G0A7B-45C-45D-70X0Y-2Z-2 \n",
-                    "G0A-1.5B-45C-45D-70X0Y-2Z-2 \n",
-                    "G0A-12B-45C-45D-70X0Y-2Z-2 \n",
-                    "G0A6B-70C-70D-30X0Y-0.5Z-0.5 \n",
-                    "G0A-2B-65C-65D-34.5X0Y-0.7Z-0.7 \n",
-                    "G0A-10B-70C-70D-28X0Y-0.35Z-0.35 \n"]
+moverPiezaCodesUno=["G0A10B-35C-35D-85X0Y-1.4Z-1.4 \n",
+                    "G0A-2B-27C-27D-95X0Y-1.8Z-1.8 \n",
+                    "G0A-13.5B-33C-33D-92X0Y-1.9Z-1.9 \n",
+                    "G0A7B-45C-45D-70X0Y-1.2Z-1.2 \n",
+                    "G0A-1.5B-44C-44D-75X0Y-1.6Z-1.6 \n",
+                    "G0A-12B-45C-45D-70X0Y-1.2Z-1.2 \n",
+                    "G0A8B-70C-70D-30X0Y-0Z0 \n",
+                    "G0A0B-65C-65D-34.5X0Y-0Z-0 \n",
+                    "G0A-8B-70C-70D-30X0Y-0Z-0 \n"]
 
-moverPiezaCodesDos=["G0A10B-38C-38D-92X0Y-2.3Z-2.3 \n",
+moverPiezaCodesDos=["G0A10B-35C-35D-96X0Y-2.4Z-2.4 \n",
                     "G0A-2B-34C-34D-98X0Y-2.6Z-2.6 \n",
-                    "G0A-13.5B-37C-37D-92X0Y-2.35Z-2.35 \n",
-                    "G0A7B-49C-49D-75X0Y-2Z-2 \n",
-                    "G0A-1.5B-49C-49D-75X0Y-2Z-2 \n",
+                    "G0A-13.5B-37C-37D-94X0Y-2.3Z-2.3 \n",
+                    "G0A7B-49C-49D-75X0Y-1.8Z-1.8 \n",
+                    "G0A-1.5B-49C-49D-75X0Y-1.8Z-1.8 \n",
                     "G0A-12B-49C-49D-75X0Y-2Z-2 \n",
-                    "G0A6B-74C-74D-35X0Y-0.5Z-0.5 \n",
-                    "G0A-2B-72C-72D-38.5X0Y-0.7Z-0.7 \n",
-                    "G0A-10B-75C-75D-32X0Y-0.35Z-0.35 \n"]
+                    "G0A8B-73C-73D-35X0Y-0.6Z-0.6 \n",
+                    "G0A0B-71C-71D-38.5X0Y-0.6Z-0.6 \n",
+                    "G0A-8B-74C-74D-34X0Y-0.6Z-0.6 \n"]
 
 moverPiezaCodesTres=["G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
                     "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
