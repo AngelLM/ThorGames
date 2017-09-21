@@ -6,7 +6,9 @@ import sys
 import serial
 import glob
 
-puerto0='/dev/ttyACM0'
+puerto0='/dev/ttyUSB0'
+puerto1='/dev/ttyACM0'
+puerto2='/dev/ttyUSB1'
 
 
 gameArray = [0,0,0,0,0,0,0,0,0]
@@ -36,7 +38,7 @@ moverPiezaCodesUno=["G0A10B-35C-35D-85X0Y-2.3Z-2.3 \n",
                     "G0A-2B-30C-30D-90X0Y-2.6Z-2.6 \n",
                     "G0A-13.5B-33C-33D-88X0Y-2.35Z-2.35 \n",
                     "G0A7B-45C-45D-70X0Y-2Z-2 \n",
-                    "G0A-3B-45C-45D-70X0Y-2Z-2 \n",
+                    "G0A-1.5B-45C-45D-70X0Y-2Z-2 \n",
                     "G0A-12B-45C-45D-70X0Y-2Z-2 \n",
                     "G0A6B-70C-70D-30X0Y-0.5Z-0.5 \n",
                     "G0A-2B-65C-65D-34.5X0Y-0.7Z-0.7 \n",
@@ -46,35 +48,35 @@ moverPiezaCodesDos=["G0A10B-38C-38D-92X0Y-2.3Z-2.3 \n",
                     "G0A-2B-34C-34D-98X0Y-2.6Z-2.6 \n",
                     "G0A-13.5B-37C-37D-92X0Y-2.35Z-2.35 \n",
                     "G0A7B-49C-49D-75X0Y-2Z-2 \n",
-                    "G0A-3B-49C-49D-75X0Y-2Z-2 \n",
+                    "G0A-1.5B-49C-49D-75X0Y-2Z-2 \n",
                     "G0A-12B-49C-49D-75X0Y-2Z-2 \n",
                     "G0A6B-74C-74D-35X0Y-0.5Z-0.5 \n",
                     "G0A-2B-72C-72D-38.5X0Y-0.7Z-0.7 \n",
                     "G0A-10B-75C-75D-32X0Y-0.35Z-0.35 \n"]
 
-moverPiezaCodesTres=["G0A-2B-40C-40D90X3Y-9Z-9 \n",
-                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
-                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
-                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
-                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
-                    "G0A-2B-40C-40D90X3Y-9Z-9 \n",
-                    "G01A-2B-40C-40D90X3Y-9Z-9F2000 \n",
-                    "G01A-2B-40C-40D90X3Y-9Z-9F2000 \n",
-                    "G01A-2B-40C-40D90X3Y-9Z-9F2000 \n"]
+moverPiezaCodesTres=["G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n",
+                    "G01A-2B40C40D-85X3Y-3Z-3F2000 \n"]
 
-pillarPiezaCodesUno=["Pillo Pieza 0 UNO \n",
-                    "Pillo Pieza 1 UNO \n",
-                    "Pillo Pieza 2 UNO \n",
-                    "Pillo Pieza 3 UNO \n",
-                    "Pillo Pieza 4 UNO \n"]
+pillarPiezaCodesUno=["G0A65B-25C-25D-99X0Y-2Z-2 \n",
+                    "G0A76B-25C-25D-99X0Y-2Z-2 \n",
+                    "G0A90B-32C-32D-100X0Y-2Z-2 \n",
+                    "G0A102B-32C-32D-100X0Y-2Z-2 \n",
+                    "G0A112B-32C-32D-100X0Y-2.5Z-2.5 \n"]
 
-pillarPiezaCodesDos=["Pillo Pieza 0 DOS \n",
-                    "Pillo Pieza 1 DOS \n",
-                    "Pillo Pieza 2 DOS \n",
-                    "Pillo Pieza 3 DOS \n",
-                    "Pillo Pieza 4 DOS \n"]
+pillarPiezaCodesDos=["G0A65B-39C-39D-99X0Y-2.7Z-2.7 \n",
+                    "G0A76B-34C-34D-105X0Y-2.8Z-2.8 \n",
+                    "G0A90B-34C-34D-106X0Y-2.8Z-2.8 \n",
+                    "G0A102B-34C-34D-106X0Y-2.9Z-2.9 \n",
+                    "G0A112B-38.5C-38.5D-99X0Y-2.7Z-2.7 \n"]
 
-pillarPiezaCodesTres=["Pillo Pieza 0 TRES \n",
+pillarPiezaCodesTres=["G01A-2B-30C-30D-75X3Y-1Z-1F2000 \n",
                     "Pillo Pieza 1 TRES \n",
                     "Pillo Pieza 2 TRES \n",
                     "Pillo Pieza 3 TRES \n",
@@ -227,6 +229,7 @@ def ganarFila(f):
                 moverPieza(i)
 
     print "Thor wins"
+    s2.write(('w').encode('UTF-8'))
     juegoTerminado = True
 
 def ganarColumna(c):
@@ -250,6 +253,7 @@ def ganarColumna(c):
                 moverPieza(i)
 
     print "Thor wins"
+    s2.write(('w').encode('UTF-8'))
     juegoTerminado = True
 
 def ganarDiagonal(d):
@@ -268,6 +272,7 @@ def ganarDiagonal(d):
                 moverPieza(i)
 
     print "Thor wins"
+    s2.write(('w').encode('UTF-8'))
     juegoTerminado = True
 
 def bloquearFila(f):
@@ -329,15 +334,17 @@ def bloquearDiagonal(d):
 def pedirDatos():
     global casillas
     casilla = comprobarArray(list(s0.readline()))
-    numerocasilla = int(casilla)
-    if numerocasilla!=-1 and numerocasilla!=10 and numerocasilla!=99:
-        casillas[numerocasilla]=1
-    actualizarDatos()
+    if casilla!=10 and casilla!=-1 and casilla!=99:
+        numerocasilla = int(casilla)
+        if numerocasilla!=-1 and numerocasilla!=10 and numerocasilla!=99:
+            casillas[numerocasilla]=1
+        actualizarDatos()
 
 def comprobarArray(inputArray):
     # print inputArray
     global gameArray
     global empiezaThor
+    global juegoTerminado
     # print gameArray
     contador = 0
     index = 5
@@ -350,6 +357,8 @@ def comprobarArray(inputArray):
         return index
     elif contador >1:
         print "Error: >1 diferencia"
+        s2.write(('t').encode('UTF-8'))
+        juegoTerminado = True
         return 10
     elif contador == 0 and turnoNumero == 0:
         empiezaThor = True
@@ -361,7 +370,13 @@ def comprobarArray(inputArray):
 
 
 def mover():
-    if jugadaDetect():
+    if turnoNumero==0 and empiezaThor == True:
+        randomnum = random.randrange(2)
+        if randomnum == 0:
+            moverCentro()
+        else:
+            moverEsquinas()
+    elif jugadaDetect():
         moverBordes()
     else:
         if not moverCentro():
@@ -376,55 +391,57 @@ def moverCentro():
         return True
     return False
 
-def moverEsquinas():
-    global casillas
-    for i in [0,2,6,8]:
-        if casillas[i]==0:
-            casillas[i]=2
-            moverPieza(i)
-            return True
-    return False
-
 # def moverEsquinas():
 #     global casillas
-#     esquinasVacias=[]
 #     for i in [0,2,6,8]:
 #         if casillas[i]==0:
-#             esquinasVacias.append(i)
-#
-#     if len(esquinasVacias)==0:
-#         return False
-#
-#     elif len(esquinasVacias)==1:
-#         casillas[esquinasVacias[0]]=2
-#         moverPieza(esquinasVacias[0])
-#         return True
-#
-#     else:
-#         for k in esquinasVacias:
-#             if k == 0:
-#                 if casillas[1]==0 and casillas[2]==0 and casillas[3]==0 and casillas[6]==0:
-#                     casillas[k]=2
-#                     moverPieza(k)
-#                     return True
-#             if k == 2:
-#                 if casillas[0]==0 and casillas[1]==0 and casillas[5]==0 and casillas[8]==0:
-#                     casillas[k]=2
-#                     moverPieza(k)
-#                     return True
-#             if k == 2:
-#                 if casillas[0]==0 and casillas[1]==0 and casillas[5]==0 and casillas[8]==0:
-#                     casillas[k]=2
-#                     moverPieza(k)
-#                     return True
-#
-#
-#
-#
 #             casillas[i]=2
 #             moverPieza(i)
 #             return True
 #     return False
+
+def moverEsquinas():
+    global casillas
+    esquinasVacias=[]
+    esquinasMolonas=[]
+    for i in [0,2,6,8]:
+        if casillas[i]==0:
+            esquinasVacias.append(i)
+
+    if len(esquinasVacias)==0:
+        return False
+
+    elif len(esquinasVacias)==1:
+        casillas[esquinasVacias[0]]=2
+        moverPieza(esquinasVacias[0])
+        return True
+
+    else:
+        for k in esquinasVacias:
+            if k == 0:
+                if casillas[1]==0 and casillas[2]==0 and casillas[3]==0 and casillas[6]==0:
+                    esquinasMolonas.append(k)
+            if k == 2:
+                if casillas[0]==0 and casillas[1]==0 and casillas[5]==0 and casillas[8]==0:
+                    esquinasMolonas.append(k)
+            if k == 6:
+                if casillas[0]==0 and casillas[3]==0 and casillas[7]==0 and casillas[8]==0:
+                    esquinasMolonas.append(k)
+            if k == 8:
+                if casillas[6]==0 and casillas[7]==0 and casillas[2]==0 and casillas[5]==0:
+                    esquinasMolonas.append(k)
+
+        if len(esquinasMolonas)>0:
+            randomnum = random.randrange(len(esquinasMolonas))
+            casillas[esquinasMolonas[randomnum]]=2
+            moverPieza(esquinasMolonas[randomnum])
+            return True
+
+        else:
+            randomnum = random.randrange(len(esquinasVacias))
+            casillas[randomnum]=2
+            moverPieza(randomnum)
+            return True
 
 def jugadaDetect():
     global casillas
@@ -483,19 +500,25 @@ def checkFinal():
         if contador==False:
             juegoTerminado=True
             print "Empate"
+            s1.write(('G01A0B0C0D0X0Y0Z0F1000 \n').encode('UTF-8'))
 
 def moverPieza(pos):
     pillarPieza()
     print moverPiezaCodesUno[pos]
-    # s0.write((moverPiezaCodesUno[pos]).encode('UTF-8'))
+    s1.write((moverPiezaCodesUno[pos]).encode('UTF-8'))
+    time.sleep(1)
     print moverPiezaCodesDos[pos]
-    # s0.write((moverPiezaCodesDos[pos]).encode('UTF-8'))
+    s1.write((moverPiezaCodesDos[pos]).encode('UTF-8'))
+    time.sleep(1)
     print "M3S100 \n"
-    # s0.write(('M3S100 \n').encode('UTF-8'))
+    s1.write(('M3S100 \n').encode('UTF-8'))
+    time.sleep(1)
     print "G4P0.5\n"
-    # s0.write(('G4P0.5 \n').encode('UTF-8'))
+    s1.write(('G4P0.5 \n').encode('UTF-8'))
+    time.sleep(1)
     print moverPiezaCodesTres[pos]
-    # s0.write(moverPiezaCodesTres[pos]).encode('UTF-8'))
+    s1.write((moverPiezaCodesTres[pos]).encode('UTF-8'))
+    time.sleep(1)
 
 def subirTurno():
     global turnoNumero
@@ -503,21 +526,33 @@ def subirTurno():
 
 def pillarPieza():
     print pillarPiezaCodesUno[turnoNumero]
-    # s0.write((pillarPiezaCodesUno[turnoNumero]).encode('UTF-8'))
+    s1.write((pillarPiezaCodesUno[turnoNumero]).encode('UTF-8'))
+    time.sleep(1)
     print pillarPiezaCodesDos[turnoNumero]
-    # s0.write((pillarPiezaCodesDos[turnoNumero]).encode('UTF-8'))
+    s1.write((pillarPiezaCodesDos[turnoNumero]).encode('UTF-8'))
+    time.sleep(1)
     print "M3S900 \n"
-    # s0.write(('M3S900 \n').encode('UTF-8'))
-    print "G4P0.5 \n"
-    # s0.write(('G4P0.5 \n').encode('UTF-8'))
-    print pillarPiezaCodesTres[turnoNumero]
-    # s0.write(pillarPiezaCodesTres[turnoNumero]).encode('UTF-8'))
+    s1.write(('M3S900 \n').encode('UTF-8'))
+    time.sleep(1)
+    print "G4P1 \n"
+    s1.write(('G4P0.5 \n').encode('UTF-8'))
+    time.sleep(1)
+    print pillarPiezaCodesUno[turnoNumero]
+    s1.write((pillarPiezaCodesUno[turnoNumero]).encode('UTF-8'))
+    time.sleep(1)
 
 
 s0=serial.Serial(puerto0,9600)
+s1=serial.Serial(puerto1,115200)
+s2=serial.Serial(puerto2,9600)
+
 time.sleep(2)
 s0.close()
 s0.open()
+s1.close()
+s1.open()
+s2.close()
+s2.open()
 
 printInicial()
 while juegoTerminado==False:
@@ -549,4 +584,7 @@ while juegoTerminado==False:
     printTablero()
     checkFinal()
     subirTurno()
+s1.write(('G01A0B0C0D0X0Y0Z0F1000 \n').encode('UTF-8'))
 s0.close()
+s1.close()
+s2.close()
